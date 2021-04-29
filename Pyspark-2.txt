@@ -1,0 +1,17 @@
+# Put your code here
+# Put your code here
+from pyspark.sql import SparkSession
+from pyspark.sql import *
+spark=SparkSession \
+    .builder \
+    .appName("Data Frame Ex") \
+    .config("spark.some.config.option", "some-value") \
+    .getOrCreate()
+
+df=spark.read.json("*.json")
+df.show()
+path="Employees"
+df.write.parquet(path)
+df.filter(df.stream=="JAVA").collect()
+path1="JavaEmployees"
+df1=df.write.parquet(path1)
